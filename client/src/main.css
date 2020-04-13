@@ -67,3 +67,8 @@ body
     margin-left: 30%;
     margin-right: 30%;
 }
+
+#license-plate-result
+{
+    color:white;
+}

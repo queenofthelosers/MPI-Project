@@ -11,13 +11,13 @@ class LogEntry extends React.Component
     {
         return(
             <li class="collection-item avatar">
-                    <img src={CarIcon} alt="" class="circle"/>
-                    <span class="title">Title</span>
-                    <p>First Line <br/>
-                        Second Line
-                    </p>
-                    <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                    </li>
+                <img src={CarIcon} alt="" class="circle"/>
+                <span class="title">Title</span>
+                <p>First Line <br/>
+                    Second Line
+                </p>
+                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+            </li>
         )
     }
 }

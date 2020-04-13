@@ -17,7 +17,7 @@ class CarLogs extends React.Component
                 <ul class="collection" id = "logs">
                     <LogEntry></LogEntry>
                     <LogEntry></LogEntry>
-            </ul>
+                </ul>
             </div>
         )
         

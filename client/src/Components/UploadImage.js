@@ -1,6 +1,8 @@
 import React from "react";
 import AppHeader from "./AppHeader"
 import DefaultImage from "../defaultupload.jpg"
+
+const licensePlateKey = "3e218dc76c72d28424cd04ff95daad2dbe8cf735"
 class UploadImage extends React.Component
 {
     constructor(props)
@@ -9,7 +11,8 @@ class UploadImage extends React.Component
         this.state = {
             selectedFile : null,
             imgURL : '',
-            uploaded:false
+            uploaded:false,
+            licenseplate:''
         }
         this.fileUploadHandler = this.fileUploadHandler.bind(this);
         this.processLicensePlate = this.processLicensePlate.bind(this);
@@ -34,10 +37,37 @@ class UploadImage extends React.Component
         {
             return (window.alert("Please upload a file!"));
         }
+        else
+        {
+            console.log(this.state.selectedFile)
+            console.log(this.state.imgURL);
+            const fd = new FormData();
+            fd.append('upload',this.state.selectedFile);
+            fd.append('regions','in')
+            console.log(fd);
+            fetch("https://cors-anywhere.herokuapp.com/https://api.platerecognizer.com/v1/plate-reader/", {
+                method: 'POST',
+                headers: {
+                    "Authorization": "Token 3e218dc76c72d28424cd04ff95daad2dbe8cf735",
+                    "Access-Control-Allow-Origin" : "*"
+                },
+                body: fd
+            }).then(res => res.json())
+            .then((json) => {
+                console.log(json);
+                console.log(json.results[0].plate)
+                this.setState({licenseplate:json.results[0].plate})
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+           
+        }
     }
     
     render()
     {
+        const text = "License Plate Detected : "
         return(
             <div>
                 <AppHeader></AppHeader>
@@ -54,6 +84,7 @@ class UploadImage extends React.Component
                     <br></br>
                     <button class="waves-effect waves-light btn" onClick = {this.processLicensePlate}>Upload File</button>
                     <br></br>
+                    <p id = "license-plate-result">{this.state.licenseplate!=''?(text+" "+this.state.licenseplate):("License Plate Here")}</p>
                 </div>
                 </center>
             </div>
