@@ -11,13 +11,7 @@ Once inside plate-detector folder type -
 
 >> virtualenv env
 
->> cd env/Scripts/
-
->> . activate
-
->> cd ..
-
->> cd ..
+>> . env/Scripts/activate
 
 You will be again inside the plate-detector folder now install the requirements using requirements.txt - 
 
