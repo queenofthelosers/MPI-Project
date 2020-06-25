@@ -17,7 +17,7 @@ class AppHeader extends React.Component{
         return(
             <div>
             <div id = "dash-logo">
-                <NavLink to="/dashboard"><img src = {Logo} height ="100px" width = "100px"></img></NavLink>
+                <NavLink to="/dashboard"><img src = {Logo} height ="100px" width = "100px" alt={""}></img></NavLink>
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <div id = "logo-text"><b>MSB Security</b></div>
                 <button onClick = {this.logout} id = "logout-btns" class="btn waves-effect waves-light red lighten-2">&nbsp;&nbsp;Logout&nbsp;&nbsp;</button>
@@ -27,4 +27,5 @@ class AppHeader extends React.Component{
         )
     }
 }
-export default AppHeader
+
+export default AppHeader;

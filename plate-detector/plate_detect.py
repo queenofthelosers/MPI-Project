@@ -1,12 +1,15 @@
 import numpy as np
-import cv2 
+import cv2
+import time
 import matplotlib.pyplot as plt
 import base64
 import requests
 from pprint import pprint
+import os, sys
+from datetime import datetime
 
 ##API call frequency (don't put less than 20)
-freq = 50
+freq = 10
 
 plate_num = "Not detected"
 xmin,ymin,xmax,ymax = 0,0,0,0
@@ -54,6 +57,24 @@ def detect_plate(img):
 
             plate_num = response.json().get("results")[0].get("plate")
 
+            response = requests.post('http://127.0.0.1:8000/api/checker/check_plate/',
+                data=dict(username="", flat_num="", plate_num=plate_num, pswd=""))
+
+            if (response.json() != "Not found!"):
+                username = response.json()
+                owner_flag = "True"
+
+            else:
+                owner_flag = "False"
+                username = "None"
+
+            time_visit = str(datetime.now())
+
+            response_visit = requests.post('http://127.0.0.1:8000/api/visitor/visitor_status/',
+                data=dict(username=username, plate_num=plate_num, owner_flag=owner_flag, purpose_visit="", time_visit=time_visit))
+
+            print (response_visit.json())
+
             cv2.rectangle(plate_img, (xmin,ymin), (xmax,ymax), (0,0,255), 5)
 
     else:
@@ -79,11 +100,14 @@ def detect_plate(img):
     
 cap = cv2.VideoCapture(0)
 
+# os.path.dirname(os.path.realpath(sys.argv[0]))+
+path_to_frame = "saved_img.jpg"
+
 while True: 
     
     ret, frame = cap.read(0) 
 
-    cv2.imwrite(filename='saved_img.jpg', img=frame)
+    cv2.imwrite(filename=path_to_frame, img=frame)
 
     frame = detect_plate(frame)
     frame = detect_face(frame)
@@ -93,7 +117,8 @@ while True:
     c = cv2.waitKey(1) 
     if c == 27: 
         break 
-        
+    
+    time.sleep(1)
 
 cv2.destroyAllWindows()
 cap.release() 

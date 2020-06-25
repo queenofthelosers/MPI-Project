@@ -1,9 +1,8 @@
-import React from "react";
+import React, { Component } from "react";
 import AppHeader from "./AppHeader"
 import DefaultImage from "../defaultupload.jpg"
 
-const licensePlateKey = "3e218dc76c72d28424cd04ff95daad2dbe8cf735"
-class UploadImage extends React.Component
+class UploadImage extends Component
 {
     constructor(props)
     {
@@ -19,8 +18,6 @@ class UploadImage extends React.Component
         
     }
 
-
-
     fileUploadHandler(event)
     {
         this.setState({
@@ -33,7 +30,7 @@ class UploadImage extends React.Component
     processLicensePlate(event)
     {
         //backend call to API to return result and add it to the logs
-        if(this.state.uploaded==false)
+        if(this.state.uploaded===false)
         {
             return (window.alert("Please upload a file!"));
         }
@@ -73,7 +70,7 @@ class UploadImage extends React.Component
                 <AppHeader></AppHeader>
                 <center>
                 <div class = "image-upload">
-                    <img src = {(this.state.uploaded)?this.state.imgURL:DefaultImage}></img>
+                    <img src = {(this.state.uploaded)?this.state.imgURL:DefaultImage} alt={""}></img>
                     <br></br>
                     <br></br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <label for="file-upload">
@@ -84,7 +81,7 @@ class UploadImage extends React.Component
                     <br></br>
                     <button class="waves-effect waves-light btn" onClick = {this.processLicensePlate}>Upload File</button>
                     <br></br>
-                    <p id = "license-plate-result">{this.state.licenseplate!=''?(text+" "+this.state.licenseplate):("License Plate Here")}</p>
+                    <p id = "license-plate-result">{this.state.licenseplate !== ''?(text+" "+this.state.licenseplate):("License Plate Here")}</p>
                 </div>
                 </center>
             </div>

@@ -1,7 +1,7 @@
-import React from "react";
+import React, { Component } from "react";
 import "../main.css";
 import Logo from "../logo.png";
-class Login extends React.Component
+class Login extends Component
 {
     constructor(props)
     {
@@ -37,7 +37,7 @@ class Login extends React.Component
     {
         return(
             <div>
-            <center><img  id = "logo" src = {Logo} width = "200px" height = "200px"></img></center>
+            <center><img  id = "logo" src = {Logo} width = "200px" height = "200px" alt={""}></img></center>
             <div class = "login-form">
                 <label>Username :</label>
                 <input  id = "username" type = "text" value = {this.state.username} onChange = {this.handleChange} name = "username"></input>

@@ -7,7 +7,7 @@ NOTE: virtualenv is required, install using -
 
 >> pip install virtualenv
 
-Once inside plate-detector folder type - 
+Once inside backend folder type - 
 
 >> virtualenv env
 
@@ -19,7 +19,7 @@ You will be again inside the plate-detector folder now install the requirements 
 
 Once all dependencies are installed, run the python file - 
 
->> python plate_detect.py
+>> python manage.py runserver
 
 Window opens and captures from your camera, to close the window press Esc key
 
